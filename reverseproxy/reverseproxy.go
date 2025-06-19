@@ -8,6 +8,8 @@ import (
 )
 
 // Build initializes and returns a new ReverseProxy instance suitable for SSL proxying
+// Build 支持多目标代理场景：可为每个目标地址分别创建 ReverseProxy 实例
+// 例如用于多路由分发时，每个目标调用 Build 创建一个 ReverseProxy
 func Build(toURL *url.URL) *httputil.ReverseProxy {
 	localProxy := &httputil.ReverseProxy{}
 	addProxyHeaders := func(req *http.Request) {

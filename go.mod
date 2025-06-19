@@ -1,6 +1,8 @@
 module github.com/suyashkumar/ssl-proxy
 
-go 1.24
+go 1.23.0
+
+toolchain go1.23.10
 
 require golang.org/x/crypto v0.36.0
 
