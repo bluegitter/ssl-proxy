@@ -73,7 +73,24 @@ make build
 ./ssl-proxy -from 0.0.0.0:4430 -routersFile routers.json
 ```
 
-### 5. 自定义证书组织、DNS、IP
+### 5. 支持多host转发
+前台启动：
+```bash
+ssl-proxy-linux --routersFile routers.json
+```
+后台启动：
+```bash
+./ssl-proxy-linux  -routersFile routers.json -daemon
+```
+routers.json
+```json
+[
+  {"host": "0.0.0.0:10095", "target": "http://192.168.14.225:10096"},
+  {"host": "0.0.0.0:8082", "target": "http://192.168.14.225:8001"}
+]
+```
+
+### 6. 自定义证书组织、DNS、IP
 ```bash
 ./ssl-proxy -from 0.0.0.0:4430 \
   -certOrg "MyCompany" \
@@ -81,10 +98,10 @@ make build
   -certIP "127.0.0.1,192.168.1.100"
 ```
 
-### 6. 自动生成自签名证书
+### 7. 自动生成自签名证书
 首次运行时如 `cert.pem` 或 `key.pem` 不存在会自动生成。
 
-### 7. 让 macOS 信任自签名根证书
+### 8. 让 macOS 信任自签名根证书
 1. 打开“钥匙串访问”，选择“系统”钥匙串。
 2. 导入 `cert.pem`，双击证书，展开“信任”，设置为“始终信任”。
 3. 输入管理员密码，重启浏览器。
